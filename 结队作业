@@ -1,0 +1,210 @@
+#include <iostream>
+#include <stdlib.h>
+#define MAX 100
+using namespace std;
+
+class person
+{
+public:
+	int num;
+	char name[20];
+	char cou[4];
+	char num1[50];
+};
+
+class Student :virtual public person
+{
+public:
+	int k = 0;
+	char sco1[10];
+	char sco2[10];
+	void Input()
+	{
+		cout << "学号 : "; cin >> num;
+		cout << "姓名 : "; cin >> name;
+		cout << "课程 : "; cin >> cou;
+		cout << "课程编号 : "; cin >> num1;
+		cout << "成绩1 : "; cin >> sco1;
+		cout << "成绩2 : "; cin >> sco2;
+	}
+	void Output()
+	{
+		cout << "学号: " << num << " " << "姓名: " << name << " " << "课程: " << cou << " " << "课程编号: " << num1 <<
+			" " << "成绩1: " << sco1 << " " << "成绩2: " << sco2 << endl;
+	}
+};
+Student Stu[MAX]; //定义一个学生的对象数组
+Student temp;
+static int Stutop;
+class StuManager //管理学生的类
+{
+public:
+	int Add();
+	int Search();
+
+	void Edit();
+	int Delete();
+
+};
+int StuManager::Add() //添加功能
+{
+	system("cls");
+	Student t;
+	int i, nu;
+	if (Stutop == MAX)
+	{
+		cout << "人数已满" << endl;
+		return 0;
+	}
+	cout << "请输入学号："; cin >> nu;
+	for (i = 0; i < Stutop; i++)
+	{
+		if (nu == Stu[i].num)
+		{
+			cout << "已有该学号" << endl;
+			return 0;
+		}
+		Stu->k++;
+	}
+	t.Input();
+	Stu[Stutop] = t;
+	Stutop++;
+	cout << "添加成功！" << endl;
+	return 1;
+}
+int StuManager::Search() //查询功能
+{
+	system("cls");
+	int j, n;
+	cout << "请输入学号："; cin >> n;
+	for (j = 0; j < Stutop; j++)
+	{
+		if (n == Stu[j].num) break;
+	}
+	if (j == Stutop) {
+		cout << "没有此人！" << endl;
+		return 1;
+	}
+	else
+		Stu[j].Output();
+	return 1;
+}
+
+void StuManager::Edit() //编辑功能
+{
+	system("cls");
+	Student t1;
+	int j, n;
+	cout << "请输入要编辑的人的学号："; cin >> n;
+	for (j = 0; j < Stutop; j++)
+	{
+		if (n == Stu[j].num) break;
+	}
+	if (j == Stutop)
+	{
+		cout << "没有此人！" << endl;
+		return;
+	};
+	cout << "输入修改后的信息，学号不能改:" << endl;
+	t1.Input();
+	Stu[j] = t1;
+	cout << "编辑成功！" << endl;
+}
+int StuManager::Delete() //删除功能
+{
+	system("cls");
+	int j, n;
+	cout << "请输入要删除的人的学号："; cin >> n;
+	for (j = 0; j < Stutop; j++)
+	{
+		if (n == Stu[j].num) break;
+	}
+	if (j == Stutop)
+	{
+		cout << "没有此人！" << endl; return 0;
+	};
+	for (j; j < Stutop; j++)
+	{
+		Stu[j] = Stu[j + 1];
+		Stu->k--;
+	}
+	Stutop;
+	cout << "删除成功！" << endl;
+	return 1;
+}
+
+void Stu_mune(StuManager TM)
+{
+	system("cls");
+	int b;
+	char c = 0;
+	do {
+		cout << endl;
+		cout << endl;
+		cout << "学生管理" << endl;
+		cout << "1.添加 " << endl;
+		cout << "2.查询 " << endl;
+		cout << "3.编辑 " << endl;
+		cout << "4.删除 " << endl;
+		cout << "0.退出 " << endl;
+		cout << "请选择："; cin >> b;
+		switch (b)
+		{
+		case 1:TM.Add(); break;
+		case 2:TM.Search(); break;
+		case 3:TM.Edit(); break;
+		case 4:TM.Delete(); break;
+		default:cout << "\n error" << endl; break;
+		case 0:break;
+		}
+
+	} while (b != 0);
+	for (int l = 0; l < Stu->k-1; l++) {
+		for (int m = 0; m < Stu->k - 1-l; m++) {
+			if (Stu[m].num > Stu[m + 1].num) {
+				temp = Stu[m];
+				Stu[m] = Stu[m + 1];
+				Stu[m + 1] = temp;
+			}
+		}
+	 }
+	for (int n = 0; n < Stu->k; n++) {
+		cout << "学号: " << Stu[n].num << " " << "姓名: " << Stu[n].name << " " << "课程: " << Stu[n].cou << " " << "课程编号: " << Stu[n].num1 <<
+			" " << "成绩1: " << Stu[n].sco1 << " " << "成绩2: " << Stu[n].sco2 << endl;
+	}
+}
+
+int main() //主函数
+{
+	StuManager Stumer;
+
+	int a = 1;
+	char c;
+
+	while (a)
+	{
+		system("cls");
+
+		cout << endl;
+		cout << "              ****欢迎使用小学生管理系统****" << endl;
+		cout << "               			1.学生管理                  " << endl;
+		cout << "               			0.退出                      " << endl;
+		cout << "请选择:"; cin >> a;
+
+		switch (a)  //用switch语句来判断输入的数字
+		{
+			case 1:Stu_mune(Stumer); break;
+			case 0:break;
+			default:cout << "\n error" << endl;
+			cout << "按回车键继续" << endl;
+			c = getchar();
+			break;
+		}
+	}
+	system("cls");
+	cout << endl << "谢谢使用" << endl;
+	c = getchar();
+	system("pause");
+	return 0;
+}
+
