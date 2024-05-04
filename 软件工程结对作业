@@ -1,3 +1,4 @@
+#pragma warning(disable:4996);
 #include <iostream>
 #include <random>
 #include <math.h>
@@ -10,7 +11,6 @@ float random_number_create()//随机数生成
 	std::random_device rd;
 	return rd();
 }
-
 float random_number_size(int numbers, int nummax)//控制随机数大小
 {
 	int i;
@@ -28,17 +28,12 @@ float random_number_size(int numbers, int nummax)//控制随机数大小
 				break;
 			}
 		}
-
-
 	}
 	return 0;
 }
-
 float without_brackets(int numbers, int point)//无括号四则运算
 {
 	int i;
-
-
 	for (i = 0; i < numbers; i = i + 4)
 	{
 		if (point == 1)
@@ -77,7 +72,6 @@ float without_brackets(int numbers, int point)//无括号四则运算
 			{
 				std::cout << "÷";
 			}
-
 			printf("%.0f +%.0f=""\n", num[i + 2], num[i + 3]);
 		}
 		else if (point == 0)
@@ -116,22 +110,14 @@ float without_brackets(int numbers, int point)//无括号四则运算
 			{
 				std::cout << "÷";
 			}
-
 			printf("%.2f +%.2f=""\n", num[i + 2], num[i + 3]);
-
 		}
-
 	}
-
-
-
 	return 0;
 }
 float on_brackets(int numbers, int point)//有括号的四则运算
 {
 	int i;
-
-
 	for (i = 0; i < numbers; i = i + 4)
 	{
 		if (point == 1)
@@ -170,7 +156,6 @@ float on_brackets(int numbers, int point)//有括号的四则运算
 			{
 				std::cout << "÷";
 			}
-
 			printf("%.0f) +%.0f=""\n", num[i + 2], num[i + 3]);
 		}
 		else if (point == 0)
@@ -209,23 +194,16 @@ float on_brackets(int numbers, int point)//有括号的四则运算
 			{
 				std::cout << "÷";
 			}
-
 			printf("%.2f） +%.2f=""\n", num[i + 2], num[i + 3]);
-
 		}
-
 	}
-
-
 	return 0;
 }
 float file_print1(int numbers, int point)//输出为文件
 {
 	int i;
 	FILE* fp;
-	fp = fopen("C:\\Users\\Administrator\\source\\repos\\四则运算\\杨强林.txt", "w");
-
-
+	fp = fopen("D:\\结对作业.txt", "w");
 	for (i = 0; i < numbers; i = i + 4)
 	{
 		if (point == 1)
@@ -312,13 +290,11 @@ float file_print1(int numbers, int point)//输出为文件
 	fclose(fp);
 	return 0;
 }
-float file_print2(int numbers, int point)//
+float file_print2(int numbers, int point)
 {
 	int i;
 	FILE* fp;
-	fp = fopen("C:\\Users\\Administrator\\source\\repos\\四则运算\\杨强林.txt", "w");
-
-
+	fp = fopen("D:\\结对作业.txt", "w");
 	for (i = 0; i < numbers; i = i + 4)
 	{
 		if (point == 1)
@@ -400,10 +376,7 @@ float file_print2(int numbers, int point)//
 			fprintf(fp, "%.2f) +%.2f=""\n", num[i + 2], num[i + 3]);
 
 		}
-
 	}
-
-
 	fclose(fp);
 	return 0;
 }
@@ -419,7 +392,6 @@ int main()
 	printf("******************************************************\n");
 	printf("         欢迎使用小学四则运算自动生成系统\n");
 	printf("\n");
-	printf("\n");
 	printf("         请按照步骤输入相关要求出题\n");
 	printf("*******************************************************\n");
 	std::cout << "请输入出题数量。\n";
@@ -428,9 +400,9 @@ int main()
 	std::cin >> nummax;
 	std::cout << "是否有括号的运算，是请输入1，否输入2.\n";
 	std::cin >> brackets;
-	std::cout << "是否带小数的运算，是请输入0，否输入1.\n";
+	std::cout << "是否带小数的运算，是请输入1，否输入2.\n";
 	std::cin >> point;
-	std::cout << "需要打印到文件？需要请输入1,不需要请输入0\n";
+	std::cout << "需要打印到文件？需要请输入1,不需要请输入2\n";
 	std::cin >> place;
 	random_number_size(numbers * 4, nummax);
 	if (brackets == 2)
